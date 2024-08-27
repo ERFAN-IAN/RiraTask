@@ -20,7 +20,6 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 export const dynamic = "force-dynamic";
-import { headers } from "next/headers";
 import { useGlobalContext } from "@/context/Context";
 import { DataType } from "@/zodschema/zodSchemas";
 export function DataTable<TData, TValue>({
@@ -32,7 +31,6 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  headers();
   // For getting row id to give to router.push
   const dataForRouter = data as DataType[];
   const { layout } = useGlobalContext();
