@@ -1,6 +1,6 @@
-import { CardView } from "./CardView";
+// import { CardView } from "./CardView";
 import WallOptions from "./WallOptions";
-import WallTable from "./WallTable";
+// import WallTable from "./WallTable";
 import connectDB from "@/config/database";
 import Task from "@/models/Task";
 import { CardViewMobile } from "./CardViewMobile";
@@ -8,6 +8,15 @@ import Order from "@/models/Order";
 import { dataSchema, OrderType } from "@/zodschema/zodSchemas";
 import { orderSchema } from "@/zodschema/zodSchemas";
 import { DataType } from "@/zodschema/zodSchemas";
+import dynamic from "next/dynamic";
+const CardView = dynamic(
+  () => import("@/components/Wall/CardView").then((mod) => mod.CardView),
+  { ssr: false }
+);
+const WallTable = dynamic(
+  () => import("@/components/Wall/WallTable").then((mod) => mod.default),
+  { ssr: false }
+);
 async function getData(): Promise<DataType[]> {
   try {
     await connectDB();
@@ -55,13 +64,11 @@ export default async function DemoPage() {
     //The key on CardView is for reseting the useState inside the component, otherwise the order of cards might not be correct
     <div className="mt-20">
       <WallOptions />
-      <div className="hidden md:block">
-        <WallTable data={parsedData} />
-        <CardView data={parsedData} key={Math.random()} />
-      </div>
-      <div className="md:hidden">
+      <WallTable data={parsedData} />
+      <CardView data={parsedData} key={Math.random()} />
+      {/* <div className="md:hidden">
         <CardViewMobile data={parsedData} />
-      </div>
+      </div> */}
     </div>
   );
 }
