@@ -24,7 +24,9 @@ import { useGlobalContext } from "@/context/Context";
 import { useRef } from "react";
 import { DataType } from "@/zodschema/zodSchemas";
 export const dynamic = "force-dynamic";
+import { headers } from "next/headers";
 export function CardView({ data }: { data: DataType[] }) {
+  headers();
   const { layout, order, setOrder, setIsOrderChanged } = useGlobalContext();
   const dragItem = useRef<number>(0);
   const draggedOverItem = useRef<number>(0);

@@ -24,11 +24,13 @@ import { useGlobalContext } from "@/context/Context";
 import { useRef } from "react";
 import { DataType } from "@/zodschema/zodSchemas";
 import { toast } from "@/components/ui/use-toast";
+import { headers } from "next/headers";
 export function CardViewMobile({ data }: { data: DataType[] }) {
   const { layout, order, setOrder, setIsOrderChanged } = useGlobalContext();
   const dragItem = useRef<number>(0);
   const draggedOverItem = useRef<number>(0);
   const [dataOrdered, setDataOrdered] = React.useState(data);
+  headers();
   function handleSort() {
     const arrayClone = [...dataOrdered];
     const arrayClone2 = [...arrayClone];
