@@ -23,6 +23,7 @@ import { removeTask } from "@/utils/actions";
 import { useGlobalContext } from "@/context/Context";
 import { useRef } from "react";
 import { DataType } from "@/zodschema/zodSchemas";
+export const dynamic = "force-dynamic";
 export function CardView({ data }: { data: DataType[] }) {
   const { layout, order, setOrder, setIsOrderChanged } = useGlobalContext();
   const dragItem = useRef<number>(0);
@@ -90,11 +91,15 @@ export function CardView({ data }: { data: DataType[] }) {
               }`}
             </CardTitle>
           </CardHeader>
-          <CardContent className="">
+          <CardContent className="" suppressHydrationWarning>
             <CardDescription
+              suppressHydrationWarning
               className={`${
-                new Date(item.deadline).toDateString() ===
-                  new Date().toDateString() && ` text-white `
+                new Date(
+                  new Date(item.deadline).toISOString()
+                ).toDateString() ===
+                  new Date(new Date().toISOString()).toDateString() &&
+                ` text-white `
               }`}
             >
               {`${item.description.slice(0, 100)}${

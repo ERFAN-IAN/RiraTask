@@ -19,6 +19,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
+export const dynamic = "force-dynamic";
 import { useGlobalContext } from "@/context/Context";
 import { DataType } from "@/zodschema/zodSchemas";
 export function DataTable<TData, TValue>({
@@ -72,6 +73,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                suppressHydrationWarning
                 className={`grid grid-cols-10 border-primary  ${
                   new Date(
                     new Date(row.getValue("deadline")).toISOString()

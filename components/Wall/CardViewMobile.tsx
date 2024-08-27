@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
+export const dynamic = "force-dynamic";
 import { useRouter } from "next/navigation";
 import { MoreHorizontal } from "lucide-react";
 import { removeTask } from "@/utils/actions";
@@ -67,9 +68,10 @@ export function CardViewMobile({ data }: { data: DataType[] }) {
           onDragEnter={() => (draggedOverItem.current = index)}
           onDragEnd={handleSort}
           onDragOver={(e) => e.preventDefault()}
+          suppressHydrationWarning
           className={`w-full border-primary cursor-pointer flex flex-col justify-between ${
-            new Date(item.deadline).toDateString() ===
-              new Date().toDateString() &&
+            new Date(new Date(item.deadline).toISOString()).toDateString() ===
+              new Date(new Date().toISOString()).toDateString() &&
             `bg-red-500 text-white hover:bg-red-600`
           }`}
           key={item._id.toString()}
@@ -84,8 +86,9 @@ export function CardViewMobile({ data }: { data: DataType[] }) {
               }`}
             </CardTitle>
           </CardHeader>
-          <CardContent className="">
+          <CardContent className="" suppressHydrationWarning>
             <CardDescription
+              suppressHydrationWarning
               className={`${
                 new Date(
                   new Date(item.deadline).toISOString()
