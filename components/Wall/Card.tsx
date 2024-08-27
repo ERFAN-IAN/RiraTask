@@ -102,11 +102,13 @@ const GridCard = ({
 
       <CardFooter className="flex w-full pl-0 justify-between">
         <CardContent>
-          <div className="mt-4 text-sm">
-            <p className="">
+          <div className="mt-4 text-sm" suppressHydrationWarning>
+            <p className="" suppressHydrationWarning>
               Created At: {new Date(createdAt).toLocaleDateString()}
             </p>
-            <p>Deadline: {new Date(deadline).toLocaleDateString()}</p>
+            <p suppressHydrationWarning>
+              Deadline: {new Date(deadline).toLocaleDateString()}
+            </p>
           </div>
         </CardContent>
         <div className="flex justify-end">
