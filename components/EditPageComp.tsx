@@ -88,8 +88,13 @@ const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
           <CardHeader>
             <CardTitle>{data.title}</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col gap-y-4">
-            <p>Deadline: {new Date(data.deadline).toLocaleDateString()}</p>
+          <CardContent
+            className="flex flex-col gap-y-4"
+            suppressHydrationWarning
+          >
+            <p suppressHydrationWarning>
+              Deadline: {new Date(data.deadline).toLocaleDateString()}
+            </p>
             <p>{data.description}</p>
           </CardContent>
         </Card>

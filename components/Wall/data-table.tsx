@@ -35,7 +35,7 @@ export function DataTable<TData, TValue>({
   });
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    // This useEffect is to make sure we wont have hydration errors on client and server
+    // This useEffect is to make sure red bg is applied correctly on deployment
     setIsMounted(true);
   }, []);
   // For getting row id to give to router.push

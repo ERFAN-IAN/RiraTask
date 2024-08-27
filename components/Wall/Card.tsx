@@ -49,7 +49,7 @@ const GridCard = ({
   const [isRed, setIsRed] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    // This useEffect is to make sure we wont have hydration errors on client and server
+    // This useEffect is to make sure red bg is applied correctly on deployment
     if (
       new Date(new Date(deadline).toISOString()).toDateString() ===
       new Date(new Date().toISOString()).toDateString()
