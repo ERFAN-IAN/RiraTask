@@ -6,13 +6,7 @@ import Order from "@/models/Order";
 import { dataSchema, OrderType } from "@/zodschema/zodSchemas";
 import { orderSchema } from "@/zodschema/zodSchemas";
 import { DataType } from "@/zodschema/zodSchemas";
-import dynamic from "next/dynamic";
-
-const CardView = dynamic(
-  () => import("@/components/Wall/CardView").then((mod) => mod.CardView),
-  { ssr: false }
-  //card view uses date to make the background color logic work which causes it to not work properly on vercel when ssr is on.
-);
+import { CardView } from "./CardView";
 async function getData(): Promise<DataType[]> {
   try {
     await connectDB();
@@ -62,9 +56,6 @@ export default async function DemoPage() {
       <WallOptions />
       <WallTable data={parsedData} />
       <CardView data={parsedData} key={Math.random()} />
-      {/* <div className="md:hidden">
-        <CardViewMobile data={parsedData} />
-      </div> */}
     </div>
   );
 }

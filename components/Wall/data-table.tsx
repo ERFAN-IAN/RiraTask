@@ -22,6 +22,8 @@ interface DataTableProps<TData, TValue> {
 export const dynamic = "force-dynamic";
 import { useGlobalContext } from "@/context/Context";
 import { DataType } from "@/zodschema/zodSchemas";
+import { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -31,10 +33,18 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    // This useEffect is to make sure we wont have hydration errors on client and server
+    setIsMounted(true);
+  }, []);
   // For getting row id to give to router.push
   const dataForRouter = data as DataType[];
   const { layout } = useGlobalContext();
   const router = useRouter();
+  if (!isMounted && layout === "table") {
+    return <Skeleton className="w-full h-[3rem]" />;
+  }
   return (
     <div
       className={`rounded-md border mytable ${
