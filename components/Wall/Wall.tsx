@@ -1,21 +1,17 @@
-// import { CardView } from "./CardView";
 import WallOptions from "./WallOptions";
-// import WallTable from "./WallTable";
+import WallTable from "./WallTable";
 import connectDB from "@/config/database";
 import Task from "@/models/Task";
-import { CardViewMobile } from "./CardViewMobile";
 import Order from "@/models/Order";
 import { dataSchema, OrderType } from "@/zodschema/zodSchemas";
 import { orderSchema } from "@/zodschema/zodSchemas";
 import { DataType } from "@/zodschema/zodSchemas";
 import dynamic from "next/dynamic";
+
 const CardView = dynamic(
   () => import("@/components/Wall/CardView").then((mod) => mod.CardView),
   { ssr: false }
-);
-const WallTable = dynamic(
-  () => import("@/components/Wall/WallTable").then((mod) => mod.default),
-  { ssr: false }
+  //card view uses date to make the background color logic work which causes it to not work properly on vercel when ssr is on.
 );
 async function getData(): Promise<DataType[]> {
   try {

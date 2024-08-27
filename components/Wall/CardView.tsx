@@ -62,7 +62,7 @@ export function CardView({ data }: { data: DataType[] }) {
   const router = useRouter();
   return (
     <div
-      className={`grid-cols-2 lg:grid-cols-3 gap-4 ${
+      className={`grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-4 ${
         layout === `grid` ? `grid` : `hidden`
       }`}
     >
