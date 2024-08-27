@@ -87,8 +87,11 @@ export function CardViewMobile({ data }: { data: DataType[] }) {
           <CardContent className="">
             <CardDescription
               className={`${
-                new Date(item.deadline).toDateString() ===
-                  new Date().toDateString() && ` text-white `
+                new Date(
+                  new Date(item.deadline).toISOString()
+                ).toDateString() ===
+                  new Date(new Date().toISOString()).toDateString() &&
+                ` text-white `
               }`}
             >
               {`${item.description.slice(0, 100)}${

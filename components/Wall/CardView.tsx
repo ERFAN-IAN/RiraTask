@@ -57,6 +57,7 @@ export function CardView({ data }: { data: DataType[] }) {
   // let options = { timeZone: "Iran" };
   // let eastCoastTime =
   // console.log(eastCoastTime);
+
   const router = useRouter();
   return (
     <div
@@ -73,10 +74,9 @@ export function CardView({ data }: { data: DataType[] }) {
           onDragOver={(e) => e.preventDefault()}
           suppressHydrationWarning
           className={`w-full border-primary cursor-pointer flex flex-col justify-between ${
-            new Date(item.deadline).toLocaleDateString() ===
-              new Date().toLocaleDateString("en-US", {
-                timeZone: "Iran",
-              }) && `bg-red-500 text-white hover:bg-red-600`
+            new Date(new Date(item.deadline).toISOString()).toDateString() ===
+              new Date(new Date().toISOString()).toDateString() &&
+            `bg-red-500 text-white hover:bg-red-600`
           }`}
           key={item._id.toString()}
           onClick={() => {

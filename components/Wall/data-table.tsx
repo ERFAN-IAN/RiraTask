@@ -73,8 +73,10 @@ export function DataTable<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
                 className={`grid grid-cols-10 border-primary  ${
-                  new Date(row.getValue("deadline")).toDateString() ===
-                    new Date().toDateString() &&
+                  new Date(
+                    new Date(row.getValue("deadline")).toISOString()
+                  ).toDateString() ===
+                    new Date(new Date().toISOString()).toDateString() &&
                   `bg-red-500 text-white hover:bg-red-600`
                 }`}
               >
