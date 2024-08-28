@@ -1,5 +1,5 @@
 import WallOptions from "./WallOptions";
-// import WallTable from "./WallTable";
+import WallTable from "./WallTable";
 import connectDB from "@/config/database";
 import Task from "@/models/Task";
 import Order from "@/models/Order";
@@ -54,7 +54,7 @@ export default async function DemoPage() {
     //The key on CardView is for reseting the useState inside the component, otherwise the order of cards might not be correct
     <div className="mt-20">
       <WallOptions />
-      {/* <WallTable data={parsedData} /> */}
+      <WallTable data={parsedData} />
       <CardView data={parsedData} key={Math.random()} />
     </div>
   );
