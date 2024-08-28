@@ -146,7 +146,11 @@ const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
+                        <PopoverContent
+                          className="w-auto p-0"
+                          align="start"
+                          suppressHydrationWarning
+                        >
                           <Calendar
                             mode="single"
                             selected={field.value || data.deadline}
