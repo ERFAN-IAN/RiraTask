@@ -1,12 +1,12 @@
 import WallOptions from "./WallOptions";
-import WallTable from "./WallTable";
+// import WallTable from "./WallTable";
 import connectDB from "@/config/database";
 import Task from "@/models/Task";
 import Order from "@/models/Order";
 import { dataSchema, OrderType } from "@/zodschema/zodSchemas";
 import { orderSchema } from "@/zodschema/zodSchemas";
 import { DataType } from "@/zodschema/zodSchemas";
-import { CardView } from "./CardView";
+// import { CardView } from "./CardView";
 async function getData(): Promise<DataType[]> {
   try {
     await connectDB();
@@ -54,8 +54,8 @@ export default async function DemoPage() {
     //The key on CardView is for reseting the useState inside the component, otherwise the order of cards might not be correct
     <div className="mt-20">
       <WallOptions />
-      <WallTable data={parsedData} />
-      <CardView data={parsedData} key={Math.random()} />
+      {/* <WallTable data={parsedData} />
+      <CardView data={parsedData} key={Math.random()} /> */}
     </div>
   );
 }
