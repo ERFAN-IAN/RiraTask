@@ -14,16 +14,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useRouter } from "next/navigation";
-interface DataTableProps<TData, TValue> {
+import CustomTableRow from "./CustomTableRow";
+export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 export const dynamic = "force-dynamic";
 import { useGlobalContext } from "@/context/Context";
-import { DataType } from "@/zodschema/zodSchemas";
-import { useEffect, useState } from "react";
-import { Skeleton } from "../ui/skeleton";
+// import { DataType } from "@/zodschema/zodSchemas";
+// import { useEffect, useState } from "react";
+// import { Skeleton } from "../ui/skeleton";
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -33,18 +33,17 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    // This useEffect is to make sure red bg is applied correctly on deployment
-    setIsMounted(true);
-  }, []);
-  // For getting row id to give to router.push
-  const dataForRouter = data as DataType[];
+  // const [isMounted, setIsMounted] = useState(false);
+  // useEffect(() => {
+  //   // This useEffect is to make sure red bg is applied correctly on deployment
+  //   setIsMounted(true);
+  // }, []);
+
   const { layout } = useGlobalContext();
-  const router = useRouter();
-  if (!isMounted && layout === "table") {
-    return <Skeleton className="w-full h-[3rem]" />;
-  }
+
+  // if (!isMounted && layout === "table") {
+  //   return <Skeleton className="w-full h-[3rem]" />;
+  // }
   return (
     <div
       className={`rounded-md border mytable ${
@@ -79,45 +78,15 @@ export function DataTable<TData, TValue>({
         </TableHeader>
         <TableBody className="" suppressHydrationWarning>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                suppressHydrationWarning
-                className={`grid grid-cols-10 border-primary  ${
-                  new Date(
-                    new Date(row.getValue("deadline")).toISOString()
-                  ).toDateString() ===
-                    new Date(new Date().toISOString()).toDateString() &&
-                  `bg-red-500 text-white hover:bg-red-600`
-                }`}
-              >
-                {row.getVisibleCells().map((cell, index) => {
-                  return (
-                    <TableCell
-                      key={cell.id}
-                      className={` col-span-2 cursor-pointer ${
-                        cell.id.endsWith(`actions`) &&
-                        `col-span-2 cursor-auto flex justify-center`
-                      }  ${cell.id.endsWith(`description`) && ` col-span-3`} ${
-                        cell.id.endsWith(`deadline`) && ` col-span-1`
-                      } `}
-                      onClick={(e) => {
-                        if (cell.id.endsWith(`actions`)) {
-                          return;
-                        }
-                        router.push(`/${dataForRouter[parseInt(row.id)]._id}`);
-                      }}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))
+            table.getRowModel().rows.map((row) => {
+              return (
+                <CustomTableRow<typeof row, TData[], TData>
+                  row={row}
+                  data={data}
+                  key={row.id}
+                />
+              );
+            })
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
