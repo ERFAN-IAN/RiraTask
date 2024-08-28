@@ -21,9 +21,6 @@ export interface DataTableProps<TData, TValue> {
 }
 export const dynamic = "force-dynamic";
 import { useGlobalContext } from "@/context/Context";
-// import { DataType } from "@/zodschema/zodSchemas";
-// import { useEffect, useState } from "react";
-// import { Skeleton } from "../ui/skeleton";
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -33,17 +30,8 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  // const [isMounted, setIsMounted] = useState(false);
-  // useEffect(() => {
-  //   // This useEffect is to make sure red bg is applied correctly on deployment
-  //   setIsMounted(true);
-  // }, []);
 
   const { layout } = useGlobalContext();
-
-  // if (!isMounted && layout === "table") {
-  //   return <Skeleton className="w-full h-[3rem]" />;
-  // }
   return (
     <div
       className={`rounded-md border mytable ${
@@ -76,7 +64,9 @@ export function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody className="" suppressHydrationWarning>
+
+        <TableBody className="" suppressHydrationWarning key={Math.random()}>
+          {/* the key is for making sure the order of rows is always correct and synced up, removing it makes the row colors not work properly */}
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => {
               return (

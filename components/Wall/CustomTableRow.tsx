@@ -1,20 +1,8 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { TableCell, TableRow } from "@/components/ui/table";
+import { flexRender } from "@tanstack/react-table";
 import { Skeleton } from "../ui/skeleton";
 import { useState, useEffect } from "react";
 import { DataType } from "@/zodschema/zodSchemas";
