@@ -39,7 +39,7 @@ export const columns: ColumnDef<ITask>[] = [
     cell: ({ row }) => {
       const createdAt: Date = row.getValue("createdAt");
       return (
-        <div className="text-left font-medium" suppressHydrationWarning>
+        <div className="text-left font-medium">
           <p className="" suppressHydrationWarning>
             {new Date(createdAt).toLocaleDateString()}
           </p>
@@ -53,10 +53,7 @@ export const columns: ColumnDef<ITask>[] = [
     cell: ({ row }) => {
       const deadline: Date = row.getValue("deadline");
       return (
-        <div
-          className="text-left font-medium flex flex-col justify-center align-center"
-          suppressHydrationWarning
-        >
+        <div className="text-left font-medium flex flex-col justify-center align-center">
           <p className="" suppressHydrationWarning>
             {new Date(deadline).toLocaleDateString()}
           </p>

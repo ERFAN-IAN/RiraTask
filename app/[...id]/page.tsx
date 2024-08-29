@@ -18,7 +18,14 @@ const page = async ({ params }: { params: { id: string[] } }) => {
     console.log(error);
     return <p>There was an error</p>;
   }
-  return <EditPageComp data={data} id={params.id[0]} key={Math.random()} />;
+  return (
+    <EditPageComp
+      data={data}
+      id={params.id[0]}
+      //the key below is for updating form default values
+      key={data.title + data.description + data.deadline.toString()}
+    />
+  );
 };
 
 export default page;

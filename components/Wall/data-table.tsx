@@ -21,6 +21,7 @@ export interface DataTableProps<TData, TValue> {
 }
 export const dynamic = "force-dynamic";
 import { useGlobalContext } from "@/context/Context";
+import { DataType } from "@/zodschema/zodSchemas";
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -30,7 +31,7 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
+  const dataForKey = data as DataType[];
   const { layout } = useGlobalContext();
   return (
     <div
@@ -65,7 +66,10 @@ export function DataTable<TData, TValue>({
           ))}
         </TableHeader>
 
-        <TableBody className="" suppressHydrationWarning key={Math.random()}>
+        <TableBody
+          className=""
+          key={dataForKey.reduce((prev, item) => prev + item._id, "")}
+        >
           {/* the key is for making sure the order of rows is always correct and synced up, removing it makes the row colors not work properly */}
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => {

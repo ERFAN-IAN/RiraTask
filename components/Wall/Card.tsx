@@ -72,9 +72,8 @@ const GridCard = ({
       onDragEnter={() => (draggedOverItem.current = index)}
       onDragEnd={handleSort}
       onDragOver={(e) => e.preventDefault()}
-      suppressHydrationWarning
       className={`w-full border-primary cursor-pointer flex flex-col justify-between ${
-        isRed && `bg-red-500 text-white hover:bg-red-600`
+        isRed && `bg-red-600 text-white hover:bg-red-600`
       }`}
       onClick={() => {
         router.push(`/${id}`);
@@ -85,15 +84,8 @@ const GridCard = ({
           {`${title.slice(0, 25)}${title.length >= 24 ? `...` : ""}`}
         </CardTitle>
       </CardHeader>
-      <CardContent className="" suppressHydrationWarning>
-        <CardDescription
-          suppressHydrationWarning
-          className={`${
-            new Date(new Date(deadline).toISOString()).toDateString() ===
-              new Date(new Date().toISOString()).toDateString() &&
-            ` text-white `
-          }`}
-        >
+      <CardContent className="">
+        <CardDescription className={`${isRed && ` text-white `}`}>
           {`${description.slice(0, 100)}${
             description.length >= 99 ? `...` : ""
           }`}
@@ -102,7 +94,7 @@ const GridCard = ({
 
       <CardFooter className="flex w-full pl-0 justify-between">
         <CardContent>
-          <div className="mt-4 text-sm" suppressHydrationWarning>
+          <div className="mt-4 text-sm">
             <p className="" suppressHydrationWarning>
               Created At: {new Date(createdAt).toLocaleDateString()}
             </p>

@@ -46,6 +46,11 @@ const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
   const { isAddTaskModalOpen, setIsAddTaskModalOpen } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
+  const defaultValues = {
+    title: data.title,
+    description: data.description,
+    deadline: new Date(data.deadline),
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -88,10 +93,7 @@ const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
           <CardHeader>
             <CardTitle>{data.title}</CardTitle>
           </CardHeader>
-          <CardContent
-            className="flex flex-col gap-y-4"
-            suppressHydrationWarning
-          >
+          <CardContent className="flex flex-col gap-y-4">
             <p suppressHydrationWarning>
               Deadline: {new Date(data.deadline).toLocaleDateString()}
             </p>

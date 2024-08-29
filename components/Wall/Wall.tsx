@@ -51,11 +51,17 @@ export default async function DemoPage() {
     );
   }
   return (
-    //The key on CardView is for reseting the useState inside the component, otherwise the order of cards might not be correct
+    //The key on CardView is for reseting the useState inside the component, otherwise the cards might not be correct
     <div className="mt-20">
       <WallOptions />
       <WallTable data={parsedData} />
-      <CardView data={parsedData} key={Math.random()} />
+      <CardView
+        data={parsedData}
+        key={parsedData.reduce(
+          (prev, item) => prev.toString() + item._id.toString(),
+          ""
+        )}
+      />
     </div>
   );
 }

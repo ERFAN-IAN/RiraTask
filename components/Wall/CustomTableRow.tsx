@@ -39,9 +39,8 @@ export default function CustomTableRow<
   return (
     <TableRow
       data-state={row.getIsSelected() && "selected"}
-      suppressHydrationWarning
       className={`grid grid-cols-10 border-primary  ${
-        isRed && `bg-red-500 text-white hover:bg-red-600`
+        isRed && `bg-red-600 text-white hover:bg-red-600`
       }`}
     >
       {row.getVisibleCells().map((cell, index) => {
