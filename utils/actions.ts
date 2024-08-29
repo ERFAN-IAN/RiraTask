@@ -58,7 +58,7 @@ export const editTask = async (e: FormData) => {
         description: parseTest.data.description,
       }
     );
-    revalidatePath("/");
+    revalidatePath(`/${parseTest.data.id}`);
     return true;
   } catch (error) {
     console.log(error);

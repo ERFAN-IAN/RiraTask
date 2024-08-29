@@ -1,16 +1,8 @@
 "use client";
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  useFormField,
   Form,
   FormItem,
   FormLabel,
@@ -21,7 +13,6 @@ import {
 import { editTask, removeTask } from "@/utils/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { useGlobalContext } from "@/context/Context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,14 +34,8 @@ import { DataType } from "@/zodschema/zodSchemas";
 import { toast } from "./ui/use-toast";
 const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
   const router = useRouter();
-  const { isAddTaskModalOpen, setIsAddTaskModalOpen } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isDeleting, setIsDeleting] = React.useState(false);
-  const defaultValues = {
-    title: data.title,
-    description: data.description,
-    deadline: new Date(data.deadline),
-  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,7 +53,6 @@ const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
     formData.append("id", id);
     setIsSubmitting(true);
     const resp = await editTask(formData);
-    document.body.style.overflowY = "visible";
     setIsSubmitting(false);
     if (!resp) {
       toast({
@@ -78,8 +62,11 @@ const EditPageComp = ({ data, id }: { data: DataType; id: string }) => {
       });
       return;
     }
+    toast({
+      variant: "default",
+      title: "Task Edited",
+    });
     form.reset();
-    setIsAddTaskModalOpen(false);
   }
   return (
     <div className="flex flex-col">
