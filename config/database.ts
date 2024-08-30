@@ -4,7 +4,9 @@ import { z } from "zod";
 const MANGODB_URISchema = z.string();
 const parseTest = MANGODB_URISchema.safeParse(process.env.MANGODB_URI);
 if (!parseTest.success) {
-  throw new Error(`wrong MANGODB_URI,  Error: ${parseTest.error}`);
+  throw new Error(
+    `wrong MANGODB_URI, use the demo website https://ea-rira-task.vercel.app instead.  Error: ${parseTest.error}`
+  );
 }
 const connectDB = async () => {
   mongoose.set("strictQuery", true);

@@ -20,7 +20,7 @@ const loading = () => {
           <CardContent className="flex flex-col gap-y-4">
             <Skeleton className="w-[10rem] h-[1.5rem]" />
 
-            <Skeleton className="w-full h-[30rem]" />
+            <Skeleton className="w-full h-[10rem] md:h-[30rem]" />
           </CardContent>
         </Card>
         <Card className={`border-primary`}>
